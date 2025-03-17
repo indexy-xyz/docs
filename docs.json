@@ -28,8 +28,8 @@
     }
   },
   "logo": {
-    "light": "/images/light.svg",
-    "dark": "/images/dark.svg"
+    "light": "/images/logo.svg",
+    "dark": "/images/logo.svg"
   },
   "navbar": {
     "links": [
