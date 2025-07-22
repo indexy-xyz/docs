@@ -61,8 +61,6 @@ Indices can track fungible tokens and, soon, other asset types like NFTs, apps, 
 
 - **Fungible Tokens**
 - **Non-Fungible Tokens:** _(Coming Soon)_
-- **Apps:** _(Coming Soon)_
-- **Off-chain Assets:** _(Coming Soon)_
 
 ### Index Management
 
@@ -100,22 +98,71 @@ KPIs reflect performance over various periods (1 week, 1 month, 3 months, 6 mont
 
 #### Normalized Scores
 
-KPIs are normalized into a single, easy-to-understand score (0 to 10), simplifying comparisons and impact analysis.
+Each KPI is normalized into a single, easy-to-understand score (eg: numerical: 0 to 10, readable levels: High, Low).
 
 ### Our KPIs
+
+#### Mindshare
+
+Mindshare is a composite metric designed to track the visibility and engagement of assets, indexes, and blockchains on Indexy. It reflects how often something appears or is interacted with, offering a snapshot of what's gaining attention in the ecosystem.
+
+**Scores:**
+
+1. **🧠 Top of Mind** - ≥ 2.1%
+   - Highest level indicating dominant mindshare
+   - Brain emoji represents mental prominence
+2. **🟢 High** - 1.0% to 2.0%
+   - Strong mindshare presence
+   - Green circle indicates positive performance
+3. **🟡 Medium** - 0.1% to 0.9%
+   - Moderate mindshare level
+   - Yellow circle shows average awareness
+4. **🔴 Low** - \< 0.1%
+   - Minimal mindshare presence
+   - Red circle indicates low awareness
+
+**Time Ranges**
+
+- 24H (recent)
+- 1W (primary)
+- 1M (mid-term)
+- 3M (longer-term)
+
+**Asset Mindshare**
+
+Measures how frequently each asset (coin) appears across all indices:
+
+- Tracks the number of times an asset is included in indices.
+- Calculates its share of total inclusions as a percentage.
+
+**Indexes Mindshare**
+
+Captures how prominent and engaged each index is, using both composition and user interaction.
+
+- **Asset Composition Score (50%)**: Based on the mindshare of its assets, weighted by their market cap or custom weights.
+- **Engagement Score (50%)**: Based on index views and number of users tracking it.
+
+**Chains Mindshare**
+
+Tracks activity-driven visibility of each blockchain based on recent index creation and asset addition.
+
+- Counts how often coins from a blockchain are used in new indices or logged events over the past 7 days.
+- Calculates the blockchain’s share of total recent activity.
+
+#### Volatility
+
+Measures price stability or fluctuations of an index within a set period. Lower volatility suggests stability, while higher volatility indicates potential risks or rewards.
+
+Score:
 
 #### vs. Bitcoin Strength
 
 Measures how an index performs compared to Bitcoin over a given period. A positive score indicates the index is outperforming Bitcoin, providing insight into relative strength and market sentiment.
 
-#### Mindshare _(Coming Soon)_
-
-Evaluates the popularity and social relevance of an index by combining metrics such as trading volume, social media mentions, and community engagement.
+Score: 0.00 to 10.00, where 0.00 represents lowest strenght and 10.00 represents maximum strenght.
 
 #### All-Time High (ATH)
 
 Measures the current price performance of the index against its historical maximum value. This indicates how far an index is trading from its peak.
 
-#### Volatility
-
-Measures price stability or fluctuations of an index within a set period. Lower volatility suggests stability, while higher volatility indicates potential risks or rewards.
+Score: 0.00 to 10.00, where 0.00 represents all-time low and 10.00 represents all-time high.
