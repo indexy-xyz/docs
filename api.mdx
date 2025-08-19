@@ -1,0 +1,520 @@
+---
+title: "Indexy API Reference"
+---
+
+# Indexy API Reference
+
+## Base URL
+
+```
+https://indexy.co
+```
+
+## Authentication
+
+### Current Beta Access
+
+The Indexy API is currently in **closed beta**. To request access, please contact our team at [contact information]. Once approved, you'll receive an API key for testing.
+
+### Authentication Method
+
+All API requests require authentication using the `Authorization` header:
+
+```http
+Authorization: Bearer YOUR_API_KEY
+```
+
+**Note**: The API has migrated from URL parameter authentication (`?api_key=`) to header-based authentication for enhanced security.
+
+## Beta Endpoints
+
+All beta endpoints are prefixed with `/beta` and provide the latest features and improvements.
+
+---
+
+## Indexes
+
+### Get All Indexes
+
+Retrieve a paginated list of all cryptocurrency indexes.
+
+```http
+GET /beta/indexes
+```
+
+**Query Parameters:**
+
+- `featured` (boolean, optional) - Filter by featured status
+- `limit` (integer, optional) - Number of results to return (default: 100, max: 1000)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "indexes": [
+    {
+      "id": 721,
+      "name": "Base Low Caps",
+      "description": "Bunch of low caps with solid teams...",
+      "weights_type": "custom",
+      "featured": false,
+      "created_at": "2025-08-05T16:51:07.256Z",
+      "updated_at": "2025-08-15T09:35:33.633Z",
+      "index_performance_24h": 0,
+      "total_volume_24h": 558831.29,
+      "creator_id": 4885,
+      "current_bps": 99.61,
+      "coins": [
+        {
+          "id": 740,
+          "symbol": "i",
+          "name": "Indexy",
+          "weight": 0.25,
+          "chains": [
+            {
+              "id": 3,
+              "name": "base",
+              "smart_contract": "0x1f015712aa2a48085ec93f87d643bb625b668b07"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 556,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  },
+  "metadata": {
+    "last_updated": "2025-08-18T18:44:35.659Z",
+    "featured_count": 59
+  }
+}
+```
+
+### Get Index by ID
+
+Retrieve detailed information about a specific index.
+
+```http
+GET /beta/indexes/{id}
+```
+
+**Path Parameters:**
+
+- `id` (integer, required) - The unique identifier of the index
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "index": {
+    "id": 721,
+    "name": "Base Low Caps",
+    "description": "Bunch of low caps with solid teams...",
+    "weights_type": "custom",
+    "featured": false,
+    "created_at": "2025-08-05T16:51:07.256Z",
+    "updated_at": "2025-08-15T09:35:33.633Z",
+    "index_performance_24h": 0,
+    "total_volume_24h": 558831.29,
+    "creator_id": 4885,
+    "current_bps": 99.61,
+    "coins": [
+      {
+        "id": 740,
+        "symbol": "i",
+        "name": "Indexy",
+        "weight": 0.25,
+        "chains": [
+          {
+            "id": 3,
+            "name": "base",
+            "smart_contract": "0x1f015712aa2a48085ec93f87d643bb625b668b07"
+          }
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "last_updated": "2025-08-18T18:44:35.659Z",
+    "data_source": "live"
+  }
+}
+```
+
+### Get Index Enums
+
+Retrieve enumeration values for indexes (useful for dropdowns/selects).
+
+```http
+GET /beta/indexes/enums
+```
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "enums": [
+    { "id": 1, "name": "DeFi Index" },
+    { "id": 2, "name": "Gaming Index" },
+    { "id": 3, "name": "Infrastructure Index" }
+  ]
+}
+```
+
+---
+
+## KPIs (Key Performance Indicators)
+
+### Get KPI Enums
+
+Retrieve all available KPI types.
+
+```http
+GET /beta/kpis
+```
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "kpis": [
+    { "id": 1, "name": "Market Cap" },
+    { "id": 2, "name": "Volume" },
+    { "id": 3, "name": "Social Media" },
+    { "id": 4, "name": "Mindshare" },
+    { "id": 5, "name": "Development Activity" },
+    { "id": 6, "name": "Network Activity" },
+    { "id": 7, "name": "Unique Addresses" },
+    { "id": 8, "name": "Transaction Count" }
+  ]
+}
+```
+
+### Get KPI Data for Indexes
+
+Retrieve KPI values for indexes with time range filtering.
+
+```http
+GET /beta/kpis/indexes
+```
+
+**Query Parameters:**
+
+- `kpi_id` (integer, optional) - Filter by specific KPI ID
+- `index_id` (integer, optional) - Filter by specific index ID
+- `time_range` (string, optional) - Filter by time range: `24H`, `1W`, `1M`, `3M`, `6M`, `1Y`, `overall`
+- `limit` (integer, optional) - Number of results to return (default: 100, max: 1000)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+- `latest_only` (boolean, optional) - Return only most recent data (default: true)
+- `group_by_index` (boolean, optional) - Group KPI data by index with nested structure (default: true)
+
+**Grouped Response Example:**
+
+```json
+{
+  "success": true,
+  "indexes": [
+    {
+      "index_id": 1,
+      "index_name": "DeFi Index",
+      "kpis": [
+        {
+          "kpi_id": 1,
+          "kpi_name": "Market Cap",
+          "value": 1500000000,
+          "time_range": "24H",
+          "date": "2025-08-18T18:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 150,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+**Flat Response Example (group_by_index=false):**
+
+```json
+{
+  "success": true,
+  "kpi_indexes": [
+    {
+      "id": 12345,
+      "kpi_id": 1,
+      "index_id": 1,
+      "value": 1500000000,
+      "time_range": "24H",
+      "date": "2025-08-18T18:00:00.000Z",
+      "kpi_name": "Market Cap",
+      "index_name": "DeFi Index"
+    }
+  ],
+  "pagination": {
+    "total": 150,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+### Get KPI Data for Coins
+
+Retrieve KPI values for individual coins with blockchain information.
+
+```http
+GET /beta/kpis/coins
+```
+
+**Query Parameters:**
+
+- `kpi_id` (integer, optional) - Filter by specific KPI ID
+- `coin_id` (integer, optional) - Filter by specific coin ID
+- `time_range` (string, optional) - Filter by time range: `24H`, `1W`, `1M`, `3M`, `6M`, `1Y`, `overall`
+- `limit` (integer, optional) - Number of results to return (default: 100, max: 1000)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+- `latest_only` (boolean, optional) - Return only most recent data (default: true)
+- `group_by_coin` (boolean, optional) - Group KPI data by coin with nested structure (default: true)
+
+**Grouped Response Example:**
+
+```json
+{
+  "success": true,
+  "coins": [
+    {
+      "coin_id": 21,
+      "coin_name": "Ethereum",
+      "coin_symbol": "eth",
+      "chains": [
+        {
+          "id": 1,
+          "name": "ethereum",
+          "smart_contract": null
+        }
+      ],
+      "kpis": [
+        {
+          "kpi_id": 4,
+          "kpi_name": "Mindshare",
+          "value": 2.12,
+          "time_range": "overall",
+          "date": "2025-08-05T18:01:01.435Z"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "total": 8310,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+---
+
+## Highlights
+
+### Get Index Highlights
+
+Retrieve top-performing indexes from the highlights dashboard.
+
+```http
+GET /beta/highlights/indexes
+```
+
+**Query Parameters:**
+
+- `limit` (integer, optional) - Number of results to return (default: 10, max: 100)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "highlights": [
+    {
+      "id": 1,
+      "index_id": 721,
+      "index_name": "Base Low Caps",
+      "performance_24h": 15.5,
+      "rank": 1,
+      "highlighted_at": "2025-08-18T12:00:00.000Z"
+    }
+  ],
+  "pagination": {
+    "total": 25,
+    "limit": 10,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+---
+
+## Mindshare
+
+### Get Index Mindshare
+
+Retrieve mindshare KPI data for indexes.
+
+```http
+GET /beta/mindshare/indexes
+```
+
+**Query Parameters:**
+
+- `limit` (integer, optional) - Number of results to return (default: 100, max: 1000)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+- `time_range` (string, optional) - Filter by time range: `24H`, `1W`, `1M`, `3M`, `6M`, `1Y`, `overall`
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "mindshare_indexes": [
+    {
+      "id": 1,
+      "index_id": 721,
+      "index_name": "Base Low Caps",
+      "mindshare_score": 85.2,
+      "time_range": "24H",
+      "calculated_at": "2025-08-18T18:00:00.000Z"
+    }
+  ],
+  "pagination": {
+    "total": 150,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+### Get Chain Mindshare
+
+Retrieve mindshare data for blockchain networks.
+
+```http
+GET /beta/mindshare/chains
+```
+
+**Query Parameters:**
+
+- `limit` (integer, optional) - Number of results to return (default: 100, max: 1000)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+- `time_range` (string, optional) - Filter by time range: `24H`, `1W`, `1M`, `3M`, `6M`, `1Y`, `overall`
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "mindshare_chains": [
+    {
+      "id": 1,
+      "chain_id": 1,
+      "chain_name": "Ethereum",
+      "mindshare_score": 92.5,
+      "time_range": "24H",
+      "calculated_at": "2025-08-18T18:00:00.000Z"
+    }
+  ],
+  "pagination": {
+    "total": 25,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+### Get Coin Mindshare
+
+Retrieve mindshare data for individual coins/assets.
+
+```http
+GET /beta/mindshare/coins
+```
+
+**Query Parameters:**
+
+- `limit` (integer, optional) - Number of results to return (default: 100, max: 1000)
+- `offset` (integer, optional) - Number of results to skip (default: 0)
+- `time_range` (string, optional) - Filter by time range: `24H`, `1W`, `1M`, `3M`, `6M`, `1Y`, `overall`
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "mindshare_coins": [
+    {
+      "id": 1,
+      "coin_id": 21,
+      "coin_name": "Ethereum",
+      "coin_symbol": "eth",
+      "mindshare_score": 88.7,
+      "time_range": "24H",
+      "calculated_at": "2025-08-18T18:00:00.000Z"
+    }
+  ],
+  "pagination": {
+    "total": 500,
+    "limit": 100,
+    "offset": 0,
+    "has_more": true
+  }
+}
+```
+
+---
+
+## Error Responses
+
+All endpoints return consistent error responses:
+
+```json
+{
+  "success": false,
+  "error": "error_type",
+  "message": "Human-readable error description"
+}
+```
+
+**Common HTTP Status Codes:**
+
+- `400` - Bad Request (invalid parameters)
+- `401` - Unauthorized (missing or invalid API key)
+- `404` - Not Found (resource doesn't exist)
+- `429` - Too Many Requests (rate limit exceeded)
+- `500` - Internal Server Error
+
+---
+
+## Rate Limits
+
+The API implements rate limiting to ensure fair usage. Current limits will be communicated during the beta access approval process.
+
+## Support
+
+For technical support, feature requests, or beta access inquiries, please contact our development team.
