@@ -17,7 +17,8 @@
             "group": "Indexy Documentation V1",
             "pages": [
               "introduction",
-              "faq"
+              "faq",
+              "api"
             ]
           }
         ]
