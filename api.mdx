@@ -1,8 +1,4 @@
----
-title: "Indexy API Reference"
----
-
-# Indexy API Reference
+# API
 
 ## Base URL
 
@@ -14,7 +10,7 @@ https://indexy.co
 
 ### Current Beta Access
 
-The Indexy API is currently in **closed beta**. To request access, please contact our team at [contact information]. Once approved, you'll receive an API key for testing.
+The Indexy API is currently in **closed beta**. To request access, please contact our team at [Discord](https://discord.gg/QJqmgGeCTb) or in this [form](https://indexy.xyz/api/). Once approved, you'll receive an API key for testing.
 
 ### Authentication Method
 
@@ -23,8 +19,6 @@ All API requests require authentication using the `Authorization` header:
 ```http
 Authorization: Bearer YOUR_API_KEY
 ```
-
-**Note**: The API has migrated from URL parameter authentication (`?api_key=`) to header-based authentication for enhanced security.
 
 ## Beta Endpoints
 
@@ -147,29 +141,6 @@ GET /beta/indexes/{id}
   }
 }
 ```
-
-### Get Index Enums
-
-Retrieve enumeration values for indexes (useful for dropdowns/selects).
-
-```http
-GET /beta/indexes/enums
-```
-
-**Response Example:**
-
-```json
-{
-  "success": true,
-  "enums": [
-    { "id": 1, "name": "DeFi Index" },
-    { "id": 2, "name": "Gaming Index" },
-    { "id": 3, "name": "Infrastructure Index" }
-  ]
-}
-```
-
----
 
 ## KPIs (Key Performance Indicators)
 
@@ -514,7 +485,3 @@ All endpoints return consistent error responses:
 ## Rate Limits
 
 The API implements rate limiting to ensure fair usage. Current limits will be communicated during the beta access approval process.
-
-## Support
-
-For technical support, feature requests, or beta access inquiries, please contact our development team.
