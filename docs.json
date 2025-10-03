@@ -17,9 +17,10 @@
             "group": "Indexy Documentation V1",
             "pages": [
               "introduction",
+              "tokenomics",
+              "api",
               "contests",
-              "faq",
-              "api"
+              "faq"
             ]
           }
         ]
