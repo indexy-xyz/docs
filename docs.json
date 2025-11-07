@@ -4,8 +4,8 @@
   "name": "Documentation",
   "colors": {
     "primary": "#052C17",
-    "light": "#07C983",
-    "dark": "#CCFF00"
+    "light": "#052C17",
+    "dark": "#052C17"
   },
   "favicon": "images/favicon.png",
   "navigation": {
