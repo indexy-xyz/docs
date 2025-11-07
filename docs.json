@@ -32,7 +32,7 @@
   },
   "logo": {
     "light": "/images/logo_dark.svg",
-    "dark": "/images/logo_white.svg"
+    "dark": "/images/logo_dark.svg"
   },
   "navbar": {
     "links": [
